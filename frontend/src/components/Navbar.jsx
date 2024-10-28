@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
   return (
@@ -6,7 +7,7 @@ export default function Navbar(props) {
       <div>
         <nav className={`navbar navbar-expand-lg bg-${props.mode} navbar-${props.mode}`}>
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">greBlogger</a>
+            <Link className="navbar-brand" to="/">greBlogger</Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -21,37 +22,44 @@ export default function Navbar(props) {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">About</a>
+                  <Link className="nav-link" to="/about">About</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/profile">Profile</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/feed">Feed</Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <a
+                  <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    id="navbarDropdown"
                   >
                     Dropdown
-                  </a>
-                  <ul className={`dropdown-menu bg-${props.mode}`}>
+                  </Link>
+                  <ul className={`dropdown-menu bg-${props.mode}`} aria-labelledby="navbarDropdown">
                     <li>
-                      <a className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} href="#">
+                      <Link className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} to="#">
                         Apply for a Job
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} href="#">
+                      <Link className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} to="#">
                         Create Blogs
-                      </a>
+                      </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>
-                      <a className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} href="#">
+                      <Link className={`dropdown-item ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} to="#">
                         Contact Us
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -61,7 +69,7 @@ export default function Navbar(props) {
                   className="form-control me-2"
                   type="search"
                   placeholder="Find Your Interest"
-                  aria-label="search"
+                  aria-label="Search"
                 />
                 <button className="btn btn-outline-success" type="submit" style={{ minWidth: "120px", minHeight: "40px" }}>
                   Log in
@@ -70,8 +78,16 @@ export default function Navbar(props) {
             </div>
           </div>
           <div className="form-check form-switch">
-            <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault"></label>
+            <input
+              className="form-check-input"
+              onClick={props.toggleMode}
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+              {props.mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </label>
           </div>
         </nav>
       </div>
